@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>rationalism on Pan Narrans</title>
+    <link>/categories/rationalism/</link>
+    <description>Recent content in rationalism on Pan Narrans</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-uk</language>
+    <lastBuildDate>Sun, 26 Nov 2017 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="/categories/rationalism/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>An Intuitive Explanation of Inferential Distance</title>
+      <link>/post/an-intuitive-explanation-of-inferential-distance/</link>
+      <pubDate>Sun, 26 Nov 2017 00:00:00 +0000</pubDate>
+      
+      <guid>/post/an-intuitive-explanation-of-inferential-distance/</guid>
+      <description>Let us represent our beliefs as nodes in a network. Most nodes in your network of beliefs have dependencies, they are connected to other beliefs the truth value of which they are contingent on.
+Picture a subset of your network of beliefs, let us take a simplified section that looks like a tree, stripping away the complex interconnections to aid in visualization.
+Beliefs B and C are predicated on belief A, beliefs D and E on belief B, and beliefs F and G on belief C.</description>
+    </item>
+    
+    <item>
+      <title>Cognitive Bias Cards!</title>
+      <link>/post/cognitive-bias-cards/</link>
+      <pubDate>Sat, 08 Jul 2017 00:00:00 +0000</pubDate>
+      
+      <guid>/post/cognitive-bias-cards/</guid>
+      <description>Check out the Cognitive Bias Cards Repo for a deck of cards featuring 104 cognitive biases.
+Among other things these can be used to play Biased Pandemic: http://lesswrong.com/lw/ar2/biased_pandemic/</description>
+    </item>
+    
+  </channel>
+</rss>

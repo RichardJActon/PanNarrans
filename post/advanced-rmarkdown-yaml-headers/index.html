@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html class="no-js" lang="en-uk">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>Advanced Rmarkdown YAML headers - Pan Narrans</title>
+	<script>(function(d,e){d[e]=d[e].replace("no-js","js");})(document.documentElement,"className");</script>
+	<meta name="description" content="">
+	<meta property="og:title" content="Advanced Rmarkdown YAML headers" />
+<meta property="og:description" content="Rnotebooks - What and Why? For anyone unfamiliar with Rnotebooks here is a quick overview of why you might want to use them more experienced users can skip ahead. Rnotebooks are scientific notebooks for R, somewhat like jupyter for anyone coming from python but baked right into the Rstudio IDE which offers some benefits over the browser based interface of jupyter. It permits you to organise your code, notes, reasoning and references in one place." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="/post/advanced-rmarkdown-yaml-headers/" />
+<meta property="article:published_time" content="2019-04-24T00:00:00+00:00" />
+<meta property="article:modified_time" content="2019-04-24T00:00:00+00:00" />
+
+	
+	<link rel="dns-prefetch" href="//fonts.googleapis.com">
+	<link rel="dns-prefetch" href="//fonts.gstatic.com">
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:400,400i,700">
+	<link rel="stylesheet" href="/css/style.css">
+	
+	<link rel="shortcut icon" href="/favicon.ico">
+		
+</head>
+<body class="body">
+	<div class="container container--outer">
+		<header class="header">
+	<div class="container">
+		<div class="logo">
+			<a class="logo__link" href="/" title="Pan Narrans" rel="home">
+				<div class="logo__title">Pan Narrans</div>
+				<div class="logo__tagline">story telling ape aspiring to be a wise man</div>
+			</a>
+		</div>
+		
+<nav class="menu">
+	<button class="menu__btn" aria-haspopup="true" aria-expanded="false" tabindex="0">
+		<span class="menu__btn-title" tabindex="-1">Menu</span>
+	</button>
+	<ul class="menu__list">
+		<li class="menu__item">
+			<a class="menu__link" href="/about/">About</a>
+		</li>
+	</ul>
+</nav>
+
+	</div>
+</header>
+		<div class="wrapper flex">
+			<div class="primary">
+			
+<main class="main" role="main">
+	<article class="post">
+		<header class="post__header">
+			<h1 class="post__title">Advanced Rmarkdown YAML headers</h1>
+			<div class="post__meta meta">
+<div class="meta__item-datetime meta__item">
+	<svg class="meta__icon icon icon-time" width="16" height="14" viewBox="0 0 30 28"><path d="M15 0C7 0 1 6 1 14s6 14 14 14 14-6 14-14S23 0 15 0zm0 25C9 25 4 20 4 14S9 3 15 3s11 5 11 11-5 11-11 11zm1-18h-2v8.4l6.8 4.4L22 18l-6-3.8V7z"/></svg>
+	<time class="meta__text" datetime="2019-04-24T00:00:00">April 24, 2019</time>
+</div>
+
+<div class="meta__item-categories meta__item">
+	<svg class="meta__icon icon icon-category" width="16" height="16" viewBox="0 0 16 16"><path d="m7 2l1 2h8v11h-16v-13z"/></svg>
+	<span class="meta__text"><a class="meta__link" href="/categories/r" rel="category">R</a></span>
+</div>
+</div>
+		</header><div class="content post__content clearfix">
+			
+
+<h1 id="rnotebooks-what-and-why">Rnotebooks - What and Why?</h1>
+
+<p>For anyone unfamiliar with <a href="https://bookdown.org/yihui/rmarkdown/">Rnotebooks</a> here is a quick overview of why you might want to use them more experienced users can <a href="#body">skip ahead</a>. Rnotebooks are scientific notebooks for <code>R</code>, somewhat like <a href="https://jupyter.org/">jupyter</a> for anyone coming from <code>python</code> but baked right into the Rstudio IDE which offers some benefits over the browser based interface of jupyter. It permits you to organise your code, notes, reasoning and references in one place. Combining Rnotebooks with a version management system such as git gives a robustness similar paper lab book records when it comes to seeing what you did and when coupled with dynamism, portability, share-ability and ease of backup of electronic working. Rnotebooks use a simple flavour of markdown with options to render output to HTML and PDF (via LaTeX) formats. Rnotebooks also have big pluses for reproducibility, creating an Rnotebook that does, explains and references your analysis makes it very easy to give to another at least somewhat competent <code>R</code> user and have them re-run your analysis - potentially with their own variants. Reproducibility and verifiability are substantial issues in scientific computing, including my own field of biology. <a href="https://doi.org/10.7717/peerj-cs.158">A recent article in PeerJ</a> provides a nice discussion of these issues and a look at what the future of scientific computing notebooks might resemble.</p>
+
+<h2 id="basic-structure">Basic Structure</h2>
+
+<p>Raw Rmarkdown looks like this:</p>
+
+<pre><code>---
+title: &quot;Example Rnotebook&quot; # a yaml header with document properties and options
+---
+
+# Introduction
+
+Mardown formatted text, with __Bold__ and *exciting!* Scientific claims
+about $in-line math^2$ at least according to @Smith2007.
+
+```{r}
+print(&quot;some actual R code in chunks&quot;)
+```
+
+saved with a .Rmd file extension
+</code></pre>
+
+<p>Rstudio of course adds nice syntax highlighting, and various bells and whistles.</p>
+
+<h1 id="body">The acctual YAML header stuff</h1>
+
+<h2 id="inliner">Inline R</h2>
+
+<p>You can use inline <code>R</code> in the YAML header of an Rnotebook to produce dynamic content. This takes the general form:</p>
+
+<pre><code class="language-yaml">option: &quot;`r &lt;some R&gt; `&quot;
+</code></pre>
+
+<p>For example you can include the current date with:</p>
+
+<pre><code class="language-yaml">date: &quot;`r Sys.Date()`&quot;
+</code></pre>
+
+<p>I&rsquo;m partial to the YYYY-MM-DD format due to it&rsquo;s unambiguousness and nice sorting behaviour but you can of course employ <code>format()</code> to render the date in other ways.</p>
+
+<h2 id="params">Params</h2>
+
+<p>The params option allows you to add arguments to your Rnotebook. The params you add to your header are accessible from within the notebook from the immutable <code>params</code> list. Rstudio makes the contents of this list available in interactive sessions so you can use them whilst working on your code not just when you build the notebook. Note that you can reference <code>params</code> in other options (<a href="#bibyaml">see</a>).</p>
+
+<pre><code class="language-yaml">---
+params:
+  includeThing: TRUE # set the default to TRUE
+---
+</code></pre>
+
+<pre><code>```{r optionalChunk, eval = (params$includeThing == TRUE), echo = (params$includeThing == TRUE)}
+print(
+    paste0(
+        &quot;Some R that is only evaluated if and included in the notebook if&quot;,
+        &quot; params$includeThing is true&quot;
+    )
+)
+```
+</code></pre>
+
+<h2 id="document-format-options">Document Format Options</h2>
+
+<p>For an HTML output these are a few of my favourite options. There are numerous additional options described in the <a href="https://bookdown.org/yihui/rmarkdown/documents.html">outputs section</a> of the manual, setting the depth of the table of contents for example.</p>
+
+<pre><code class="language-yaml">---
+output:
+  html_document:
+    df_print: paged       # print paged tables - like the default 'html_notebook' format
+    fig_caption: yes
+    number_sections: yes  # prepend x.y style numbering to you sections
+    toc: yes              # Add a table of contents
+    toc_float: yes        # have to TOC float at the side of your HTML page so you do have to keep scrolling to the top
+---
+</code></pre>
+
+<p>For a PDF output <code>pdf_document</code> can be used instead of <code>html_document</code> though my preferred table format for PDF is <code>df_print: kable</code>. More advanced LaTeX customisations can also be used in conjunction with PDF outputs.</p>
+
+<h2 id="bibyaml">Bibliograghy and Citation YAML options</h2>
+
+<p>Placing a <code>bibliography</code> option in your Rnotebook&rsquo;s header and pointing it to a bibtex file containing your citation information permits you to create citations in Rnotebooks using the following syntax: <code>@Smith2016</code> for an in-line citation e.g. &lsquo;work by Smith <em>et al.</em> 2016 showed that cheese&hellip;&rsquo; or <code>[@Smith2016]</code> for a reference like this: &lsquo;assertion (Smith <em>et al.</em> 2016)&lsquo;, or even lists of citations to be contracted where possible given the citation style e.g. <code>[@Smith2016; @Jones2018]</code>, (note the semi-colon list separator) yielding something like this: &lsquo;assertion [1-2]&rsquo;</p>
+
+<p>I frequently use a header that contains code like this:</p>
+
+<pre><code class="language-yaml">---
+bibliography: &quot;`r normalizePath(params$bib)`&quot;
+params:
+  bib: &quot;~/Documents/bibtex/library.bib&quot;
+---
+</code></pre>
+
+<p>The reason I do this is my bibliography has the same path relative to my home directory on my laptop, desktop and computing clusters but the absolute paths differ and <strong>these headers seem to prefer absolute paths</strong>. Thus, if I compose a notebook on one system it won&rsquo;t execute on another unless I change the path or use a set-up like this to do so dynamically when building the notebook.</p>
+
+<p>I also frequently set the path to my working directory as a parameter to my Rnotebooks and use relative paths to any files I want to load/write in the body of the Rnotebook so as to achieve similar portability between the different system&rsquo;s I work on as I get with my bibliography files.</p>
+
+<p>The following chunk sets the working directory for when you &lsquo;knit&rsquo; your Rnotebook into the desired format in the first line and for interactive sessions in the second.</p>
+
+<pre><code>```{r}
+knitr::opts_knit$set(root.dir = normalizePath(params$pwd))
+setwd(params$pwd)
+```
+</code></pre>
+
+<p><strong>A note on generating your bibtex file(s).</strong> I currently use <a href="https://www.mendeley.com/">Mendeley</a> as my refernce manager and it has a nice bibtext output option which is automatically updated whenever you sync (On balance I would probably recomend <a href="https://www.zotero.org/">Zotero</a> to someone starting out afresh with reference management but its bibtex output is not quite as convenient as Mendeley&rsquo;s)</p>
+
+<p>If you have multiple bibliography files this can be done:</p>
+
+<pre><code class="language-yaml">bibliography: [multiple.bib, dotbib.bib, files.bib]
+</code></pre>
+
+<p>Including a <code>csl</code> option allows you to specify a citation style using the <code>.csl</code> format. The specific citations styles of numerous journals in <code>.csl</code> format can be found <a href="https://github.com/citation-style-language/styles">here</a>. Including the <code>link-citations: yes</code> option will create hyperlinks from the in-text references to the full citations at the end of the document.</p>
+
+<p>By default the bibliography is placed at the very end of your document, so simply placing a <code># References</code> header at the end of your document helps to separate your bibliography from the body of your text and puts an entry for it in the table of contents. If however you have some appendices to add after your references placing this HTML snippet in your Rnotebook should set the position at which the references will be rendered: <code>&lt;div id=&quot;refs&quot;&gt;&lt;/div&gt;</code>. Helpfully this will set the postion in both HTML and PDF outputs. (This may not work with older versions of <code>pandoc</code>).</p>
+
+<h1 id="executing-an-rnotebook-with-params">Executing an Rnotebook with params</h1>
+
+<p>Whilst you can render your Rnotebook with a one line <code>R</code> command from your terminal if you have a lot of params it can get unwieldy, you may also want to be able to reproduce your render at a later time or even submit it as a job to a batch computing manager. To do this you can create simple bash scripts like the one below to render your Rnotebook.</p>
+
+<pre><code class="language-bash">#!/bin/bash
+R --no-save --no-restore &lt;&lt;EOF
+rmarkdown::render(
+	'notebook.Rmd',
+	output_file = 'notebook.html',
+	params = list(
+		bib = &quot;path/to/some/bib.bib&quot;
+	)
+)
+EOF
+
+</code></pre>
+
+<p>The <code>--no-save</code> option prevents <code>R</code> from saving your notebook&rsquo;s R session, and the <code>--no-restore</code> option prevents your Rnotebook from loading whatever random previous <code>R</code> session files you have lying around in your working directory into it&rsquo;s session.</p>
+
+<h1 id="full-length-example-yaml-header">Full Length Example YAML header</h1>
+
+<pre><code class="language-yaml">---
+title: &quot;A thing I'm Working on - Ideally with a more descriptive title&quot;
+author: &quot;Richard J. Acton&quot;
+date: &quot;`r Sys.Date()`&quot;
+output: # Specifying multiple outputs appears to favour the first
+  pdf_document:
+    toc: yes
+    fig_caption: yes
+    df_print: kable
+  html_document:
+    fig_caption: yes
+    number_sections: yes
+    toc: yes
+    toc_float: yes
+    df_print: paged
+  html_notebook: # This determines the RStuido preview format
+    fig_caption: yes
+    number_sections: yes
+    toc: yes
+    toc_float: yes
+bibliography: &quot;`r normalizePath('~/Documents/bibtex/library.bib')`&quot;
+csl: &quot;`r normalizePath('~/Documents/bibtex/genomebiology.csl')`&quot;
+link-citations: yes # make citations hyperlinks
+linkcolor: blue
+---
+</code></pre>
+
+<h1 id="resources">Resources</h1>
+
+<ul>
+<li><a href="https://bookdown.org/yihui/rmarkdown/">R Markdown The Definitive Guide</a></li>
+<li><a href="https://github.com/citation-style-language/styles">Citation Style Launguage Styles Repository</a></li>
+</ul>
+
+<p><em>Feedback is always welcome, especially if you spot any mistakes.</em></p>
+
+		</div>
+		<footer class="post__footer">
+			
+<div class="post__tags tags clearfix">
+	<svg class="tags__badge icon icon-tag" width="16" height="16" viewBox="0 0 32 32"><path d="M32 19c0 1-1 2-1 2L21 31s-1 1-2 1-2-1-2-1L2 16c-1-1-1.4-2-1.4-2S0 12.5 0 11V3C0 1.5.8.8.8.8S1.5 0 3 0h8c1.5 0 3 .6 3 .6S15 1 16 2l15 15s1 1 1 2zM7 10a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/></svg>
+	<ul class="tags__list">
+		<li class="tags__item"><a class="tags__link btn" href="/tags/r/" rel="tag">R</a></li>
+	</ul>
+</div>
+		</footer>
+	</article>
+</main>
+
+<div class="authorbox clearfix">
+	<figure class="authorbox__avatar">
+		<img alt="Richard J. Acton avatar" src="/img/avatar.png" class="avatar" height="90" width="90">
+	</figure>
+	<div class="authorbox__header">
+		<span class="authorbox__name">About Richard J. Acton</span>
+	</div>
+	<div class="authorbox__description">
+		PhD Student Studying the Epigenomics of Human Ageing
+	</div>
+</div>
+
+<nav class="post-nav flex">
+	<div class="post-nav__item post-nav__item--prev">
+		<a class="post-nav__link" href="/post/an-intuitive-explanation-of-inferential-distance/" rel="prev"><span class="post-nav__caption">«&thinsp;Previous</span><p class="post-nav__post-title">An Intuitive Explanation of Inferential Distance</p></a>
+	</div>
+</nav>
+
+
+			</div>
+			<aside class="sidebar"><div class="widget-search widget">
+	<form class="widget-search__form" role="search" method="get" action="https://google.com/search">
+		<label>
+			<input class="widget-search__field" type="search" placeholder="SEARCH..." value="" name="q" aria-label="SEARCH...">
+		</label>
+		<input class="widget-search__submit" type="submit" value="Search">
+		<input type="hidden" name="sitesearch" value="/" />
+	</form>
+</div>
+<div class="widget-recent widget">
+	<h4 class="widget__title">Recent Posts</h4>
+	<div class="widget__content">
+		<ul class="widget__list">
+			<li class="widget__item"><a class="widget__link" href="/post/advanced-rmarkdown-yaml-headers/">Advanced Rmarkdown YAML headers</a></li>
+			<li class="widget__item"><a class="widget__link" href="/post/an-intuitive-explanation-of-inferential-distance/">An Intuitive Explanation of Inferential Distance</a></li>
+			<li class="widget__item"><a class="widget__link" href="/post/cognitive-bias-cards/">Cognitive Bias Cards!</a></li>
+		</ul>
+	</div>
+</div>
+<div class="widget-categories widget">
+	<h4 class="widget__title">Categories</h4>
+	<div class="widget__content">
+		<ul class="widget__list">
+			<li class="widget__item"><a class="widget__link" href="/categories/r">R</a></li>
+			<li class="widget__item"><a class="widget__link" href="/categories/rationalism">Rationalism</a></li>
+		</ul>
+	</div>
+</div>
+<div class="widget-taglist widget">
+	<h4 class="widget__title">Tags</h4>
+	<div class="widget__content">
+		<a class="widget-taglist__link widget__link btn" href="/tags/r" title="R">R</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/rationalism" title="Rationalism">Rationalism</a>
+	</div>
+</div>
+<div class="widget-social widget">
+	<h4 class="widget-social__title widget__title">Social</h4>
+	<div class="widget-social__content widget__content">
+		<div class="widget-social__item widget__item">
+			<a class="widget-social__link widget__link btn" title="Facebook" rel="noopener noreferrer" href="https://facebook.com/RichardJActon" target="_blank">
+				<svg class="widget-social__link-icon icon icon-facebook" width="24" height="24" viewBox="0 0 352 352"><path d="m0 32v288c0 17.5 14.5 32 32 32h288c17.5 0 32-14.5 32-32v-288c0-17.5-14.5-32-32-32h-288c-17.5 0-32 14.5-32 32zm320 0v288h-83v-108h41.5l6-48h-47.5v-31c0-14 3.5-23.5 23.5-23.5h26v-43.5c-4.4-.6-19.8-1.5-37.5-1.5-36.9 0-62 22.2-62 63.5v36h-42v48h42v108h-155v-288z"/></svg>
+				<span>Facebook</span>
+			</a>
+		</div>
+		<div class="widget-social__item widget__item">
+			<a class="widget-social__link widget__link btn" title="Twitter" rel="noopener noreferrer" href="https://twitter.com/RichardJActon" target="_blank">
+				<svg class="widget-social__link-icon icon icon-twitter" width="24" height="24" viewBox="0 0 384 312"><path d="m384 36.9c-14.1 6.3-29.3 10.5-45.2 12.4 16.3-9.7 28.8-25.2 34.6-43.6-15.2 9-32.1 15.6-50 19.1-14.4-15.2-34.9-24.8-57.5-24.8-43.5 0-78.8 35.3-78.8 78.8 0 6.2.7 12.2 2 17.9-65.5-3.3-123.5-34.6-162.4-82.3-6.7 11.6-10.6 25.2-10.6 39.6 0 27.3 13.9 51.4 35 65.6-12.9-.4-25.1-4-35.7-9.9v1c0 38.2 27.2 70 63.2 77.2-6.6 1.8-13.6 2.8-20.8 2.8-5.1 0-10-.5-14.8-1.4 10 31.3 39.1 54.1 73.6 54.7-27 21.1-60.9 33.7-97.8 33.7-6.4 0-12.6-.4-18.8-1.1 34.9 22.4 76.3 35.4 120.8 35.4 144.9 0 224.1-120 224.1-224.1 0-3.4-.1-6.8-.2-10.2 15.4-11.1 28.7-25 39.3-40.8z"/></svg>
+				<span>Twitter</span>
+			</a>
+		</div>
+		<div class="widget-social__item widget__item">
+			<a class="widget-social__link widget__link btn" title="LinkedIn" rel="noopener noreferrer" href="https://linkedin.com/in/richard-james-acton-1175053b" target="_blank">
+				<svg class="widget-social__link-icon icon icon-linkedin" width="24" height="24" viewBox="0 0 352 352"><path d="M0,40v272c0,21.9,18.1,40,40,40h272c21.9,0,40-18.1,40-40V40c0-21.9-18.1-40-40-40H40C18.1,0,0,18.1,0,40z M312,32 c4.6,0,8,3.4,8,8v272c0,4.6-3.4,8-8,8H40c-4.6,0-8-3.4-8-8V40c0-4.6,3.4-8,8-8H312z M59.5,87c0,15.2,12.3,27.5,27.5,27.5 c15.2,0,27.5-12.3,27.5-27.5c0-15.2-12.3-27.5-27.5-27.5C71.8,59.5,59.5,71.8,59.5,87z M187,157h-1v-21h-45v152h47v-75 c0-19.8,3.9-39,28.5-39c24.2,0,24.5,22.4,24.5,40v74h47v-83.5c0-40.9-8.7-72-56.5-72C208.5,132.5,193.3,145.1,187,157z M64,288h47.5 V136H64V288z"/></svg>
+				<span>LinkedIn</span>
+			</a>
+		</div>
+		<div class="widget-social__item widget__item">
+			<a class="widget-social__link widget__link btn" title="GitHub" rel="noopener noreferrer" href="https://github.com/richardjacton" target="_blank">
+				<svg class="widget-social__link-icon icon icon-github" width="24" height="24" viewBox="0 0 384 374"><path d="m192 0c-106.1 0-192 85.8-192 191.7 0 84.7 55 156.6 131.3 181.9 9.6 1.8 13.1-4.2 13.1-9.2 0-4.6-.2-16.6-.3-32.6-53.4 11.6-64.7-25.7-64.7-25.7-8.7-22.1-21.3-28-21.3-28-17.4-11.9 1.3-11.6 1.3-11.6 19.3 1.4 29.4 19.8 29.4 19.8 17.1 29.3 44.9 20.8 55.9 15.9 1.7-12.4 6.7-20.8 12.2-25.6-42.6-4.8-87.5-21.3-87.5-94.8 0-20.9 7.5-38 19.8-51.4-2-4.9-8.6-24.3 1.9-50.7 0 0 16.1-5.2 52.8 19.7 15.3-4.2 31.7-6.4 48.1-6.5 16.3.1 32.7 2.2 48.1 6.5 36.7-24.8 52.8-19.7 52.8-19.7 10.5 26.4 3.9 45.9 1.9 50.7 12.3 13.4 19.7 30.5 19.7 51.4 0 73.7-44.9 89.9-87.7 94.6 6.9 5.9 13 17.6 13 35.5 0 25.6-.2 46.3-.2 52.6 0 5.1 3.5 11.1 13.2 9.2 76.2-25.5 131.2-97.3 131.2-182 0-105.9-86-191.7-192-191.7z"/></svg>
+				<span>GitHub</span>
+			</a>
+		</div>
+		<div class="widget-social__item widget__item">
+			<a class="widget-social__link widget__link btn" title="GitLab" rel="noopener noreferrer" href="https://gitlab.com/richardjacton" target="_blank">
+				<svg class="widget-social__link-icon icon icon-gitlab" width="24" height="24" viewBox="0 0 265 265"><path d="M128.075 236.075l47.104-144.97H80.97l47.104 144.97z M14.956 91.104L.642 135.16a9.752 9.752 0 0 0 3.542 10.903l123.891 90.012-113.12-144.97z M14.956 91.105H80.97L52.601 3.79c-1.46-4.493-7.816-4.492-9.275 0l-28.37 87.315z M241.194 91.104l14.314 44.056a9.752 9.752 0 0 1-3.543 10.903l-123.89 90.012 113.119-144.97z M241.194 91.105h-66.015l28.37-87.315c1.46-4.493 7.816-4.492 9.275 0l28.37 87.315z"/></svg>
+				<span>GitLab</span>
+			</a>
+		</div>
+		<div class="widget-social__item widget__item">
+			<a class="widget-social__link widget__link btn" title="orcid" rel="noopener noreferrer" href="https://orcid.org/0000-0002-2574-9611" target="_blank">
+				<svg
+	class="widget-social__link-icon icon icon-orcid"
+	viewBox="0 0 24 24"
+	width="24"
+	height="24"
+>
+<style type="text/css">
+	.st0{fill:#000000;}
+	.st1{fill:#FFFFFF;}
+</style>
+<g transform="matrix(0.09375,0,0,0.09375,0,21.75)">
+	<path class="st0" d="M 256,-104 C 256,-33.3 198.7,24 128,24 57.3,24 0,-33.3 0,-104 c 0,-70.7 57.3,-128 128,-128 70.7,0 128,57.3 128,128 z" />
+	<g transform="translate(0,-232)">
+		<path class="st1" d="M 86.3,186.2 H 70.9 V 79.1 h 15.4 v 48.4 z" />
+		<path class="st1" d="m 108.9,79.1 h 41.6 c 39.6,0 57,28.3 57,53.6 0,27.5 -21.5,53.6 -56.8,53.6 h -41.8 z m 15.4,93.3 h 24.5 c 34.9,0 42.9,-26.5 42.9,-39.7 C 191.7,111.2 178,93 148,93 h -23.7 z" />
+		<path class="st1" d="m 88.7,56.8 c 0,5.5 -4.5,10.1 -10.1,10.1 -5.6,0 -10.1,-4.6 -10.1,-10.1 0,-5.6 4.5,-10.1 10.1,-10.1 5.6,0 10.1,4.6 10.1,10.1 z" />
+	</g>
+</g>
+</svg>
+
+				<span>ORCID</span>
+			</a>
+		</div>
+		<div class="widget-social__item widget__item">
+			<a class="widget-social__link widget__link btn" title="quora" rel="noopener noreferrer" href="https://www.quora.com/profile/Richard-Acton-2" target="_blank">
+				<svg
+	class="widget-social__link-icon icon icon-quora"
+	viewBox="0 0 24 24"
+	width="24"
+	height="24"
+>
+<g transform="matrix(0.43866172,0,0,0.43866172,0.28773224,0.24386557)">
+	<path d="m 47.5,40.9 h 3.3 c 0.1,0.5 0,1.1 -0.1,1.9 -0.1,0.7 -0.3,1.6 -0.7,2.7 -0.4,1.1 -0.9,2 -1.6,2.8 -0.7,0.8 -1.7,1.6 -3,2.2 -1.3,0.6 -2.8,0.9 -4.5,0.9 -1.3,0 -2.5,-0.2 -3.6,-0.5 -1.1,-0.4 -2.1,-0.9 -2.9,-1.6 -0.9,-0.7 -1.6,-1.4 -2.2,-2.2 -0.6,-0.8 -1.2,-1.7 -1.8,-2.7 -1.8,0.5 -3.7,0.8 -5.7,0.8 -2.8,0 -5.5,-0.5 -8.2,-1.6 C 13.8,42.5 11.5,41 9.4,39.2 7.3,37.3 5.7,35 4.4,32.3 3.1,29.5 2.5,26.6 2.5,23.4 c 0,-3.2 0.6,-6.1 1.9,-8.9 1.3,-2.8 2.9,-5.1 5,-7 2.1,-1.9 4.4,-3.4 7.1,-4.4 2.7,-1.1 5.4,-1.6 8.1,-1.6 2.3,0 4.5,0.3 6.7,1 2.2,0.7 4.2,1.7 6.1,3 1.9,1.3 3.5,2.8 4.9,4.6 1.4,1.8 2.5,3.8 3.3,6.1 0.8,2.3 1.2,4.7 1.2,7.3 0,3.5 -0.7,6.8 -2.2,9.7 -1.5,2.9 -3.5,5.4 -6.1,7.4 0.9,1.3 1.7,2.3 2.6,3 0.9,0.7 1.8,1 2.9,1 1.1,0 2,-0.3 2.6,-1 0.5,-1.1 0.9,-1.9 0.9,-2.7 z M 36.7,23.2 c 0,-5.9 -1,-10.3 -2.9,-13.2 -1.9,-2.9 -5,-4.4 -9.2,-4.4 -4.1,0 -7.2,1.5 -9.1,4.4 -1.9,2.9 -2.9,7.3 -2.9,13.2 0,5.9 1,10.3 2.9,13.2 1.9,2.9 5,4.3 9.1,4.3 1.4,0 2.6,-0.2 3.7,-0.5 -0.4,-0.8 -0.8,-1.5 -1.1,-2 C 26.9,37.7 26.5,37 26,36.4 25.5,35.7 25,35.2 24.5,34.8 24,34.4 23.4,34.1 22.7,33.8 22,33.5 21.3,33.4 20.5,33.4 c -0.9,0 -1.6,0.1 -2.2,0.4 l -1.4,-2.7 c 2,-1.7 4.5,-2.5 7.7,-2.5 2.5,0 4.5,0.5 6,1.5 1.6,1 3,2.4 4.2,4.3 1.2,-2.7 1.9,-6.5 1.9,-11.2 z"
+	/>
+</g>
+</svg>
+
+				<span>Quora</span>
+			</a>
+		</div>
+		<div class="widget-social__item widget__item">
+			<a class="widget-social__link widget__link btn" title="stackoverflow" rel="noopener noreferrer" href="https://stackoverflow.com/users/6083749/richard-acton" target="_blank">
+				<svg
+  class="widget-social__link-icon icon icon-stackoverflow"
+   height="24"
+   width="24"
+   viewBox="0 0 24 24">
+  <g transform="matrix(0.91304348,0,0,0.91304348,1.5366886,2.1577008)">
+    <path d="m 18.165937,20.234627 v -6.161664 h 2.045035 v 8.206698 H 1.7525424 v -8.206698 h 2.0450343 v 6.161664 z" />
+    <path d="M 6.0550829,13.488668 16.094344,15.586821 16.519286,13.568344 6.480025,11.470192 Z M 7.3830275,8.7080672 16.67864,13.037167 17.528524,11.178044 8.2329118,6.8223858 Z M 9.95924,4.1399374 17.84723,10.699984 19.148616,9.1330095 11.260626,2.5729635 Z M 15.058547,-0.720339 13.411895,0.50136921 19.520441,8.7346261 21.167092,7.5129172 Z M 5.8426118,18.163032 H 16.094344 V 16.117998 H 5.8426118 Z" />
+  </g>
+</svg>
+
+				<span>Stack Overflow</span>
+			</a>
+		</div>
+		<div class="widget-social__item widget__item">
+			<a class="widget-social__link widget__link btn" title="researchgate" rel="noopener noreferrer" href="https://www.researchgate.net/profile/Richard_Acton" target="_blank">
+				<svg
+	class="widget-social__link-icon icon icon-researchgate"
+	viewBox="0 0 24 24"
+	height="24"
+	width="24"
+>
+<g transform="scale(0.25531915)">
+	<g>
+		<path d="M 89,0 H 5 C 2.238,0 0,2.238 0,5 v 84 c 0,2.762 2.238,5 5,5 h 84 c 2.762,0 5,-2.238 5,-5 V 5 C 94,2.238 91.762,0 89,0 Z M 45.064,73.975 H 33.082 C 32.519,73.219 32.16,72.352 32.008,71.37 31.854,70.388 31.752,69.369 31.699,68.311 L 31.4,57.959 C 31.298,55.842 30.775,54.184 29.824,52.973 28.876,51.762 27.273,51.159 25.025,51.159 H 19.248 V 73.975 H 8.313 V 20.028 H 28.51 c 4.557,0 8.101,1.146 10.632,3.438 2.529,2.293 3.796,5.78 3.796,10.465 0,3.626 -0.734,6.586 -2.203,8.878 -1.467,2.292 -3.744,3.765 -6.832,4.421 v 0.15 c 1.872,0.252 3.363,0.717 4.479,1.396 1.112,0.683 1.975,1.662 2.581,2.945 0.607,1.285 1.025,2.91 1.253,4.875 0.228,1.965 0.366,4.381 0.417,7.254 0.05,2.868 0.217,5.06 0.495,6.572 0.277,1.51 0.923,2.542 1.937,3.098 z m 40.624,0 H 77.637 V 68.99 h -0.15 c -1.317,2.111 -2.897,3.652 -4.746,4.604 -1.85,0.96 -4.061,1.438 -6.643,1.438 -3.342,0 -6.063,-0.616 -8.164,-1.851 -2.103,-1.232 -3.746,-3.06 -4.935,-5.479 C 51.811,65.286 51.01,62.3 50.607,58.752 50.2,55.197 49.998,51.081 49.998,46.398 c 0,-4.536 0.291,-8.515 0.875,-11.939 0.581,-3.425 1.58,-6.284 2.999,-8.574 1.416,-2.29 3.291,-4.018 5.618,-5.177 2.326,-1.159 5.24,-1.739 8.732,-1.739 5.971,0 10.274,1.475 12.907,4.422 2.631,2.947 3.948,7.166 3.948,12.655 H 74.6 c 0,-0.956 -0.113,-1.975 -0.342,-3.062 -0.226,-1.082 -0.596,-2.062 -1.102,-2.944 -0.504,-0.881 -1.149,-1.611 -1.936,-2.193 -0.783,-0.577 -1.734,-0.868 -2.848,-0.868 -2.633,0 -4.53,1.463 -5.693,4.383 -1.166,2.921 -1.746,7.758 -1.746,14.509 0,3.271 0.101,6.207 0.301,8.8 0.201,2.596 0.574,4.812 1.104,6.651 0.531,1.836 1.291,3.245 2.277,4.229 0.988,0.979 2.264,1.473 3.836,1.473 0.656,0 1.377,-0.178 2.162,-0.53 0.785,-0.351 1.52,-0.879 2.201,-1.584 0.684,-0.706 1.254,-1.599 1.709,-2.685 0.455,-1.084 0.686,-2.353 0.686,-3.814 v -5.516 h -7.215 v -8.011 h 17.691 v 29.089 h 0.003 z"
+		/>
+		<path d="m 24.41,28.038 h -5.162 v 15.561 h 4.556 c 2.631,0 4.655,-0.615 6.074,-1.851 1.416,-1.231 2.124,-3.311 2.124,-6.231 0,-4.985 -2.528,-7.479 -7.592,-7.479 z" />
+	</g>
+</g>
+</svg>
+
+				<span>Research Gate</span>
+			</a>
+		</div>
+		<div class="widget-social__item widget__item">
+			<a class="widget-social__link widget__link btn" title="Email" href="mailto:richardjacton@gmail.com">
+				<svg class="widget-social__link-icon icon icon-mail" width="24" height="24" viewBox="0 0 416 288"><path d="m0 16v256 16h16 384 16v-16-256-16h-16-384-16zm347 16-139 92.5-139-92.5zm-148 125.5 9 5.5 9-5.5 167-111.5v210h-352v-210z"/></svg>
+				<span>richardjacton@gmail.com</span>
+			</a>
+		</div>
+	</div>
+</div>
+
+</aside>
+		</div>
+		<footer class="footer">
+	<div class="container footer__container flex">
+		
+		<div class="footer__copyright">
+			&copy; 2019 Pan Narrans.
+			<span class="footer__copyright-credits">Generated with <a href="https://gohugo.io/" rel="nofollow noopener" target="_blank">Hugo</a> and <a href="https://github.com/Vimux/Mainroad/" rel="nofollow noopener" target="_blank">Mainroad</a> theme.</span>
+		</div>
+	</div>
+</footer>
+	</div>
+<script async defer src="/js/menu.js"></script>
+</body>
+</html>
